@@ -3,7 +3,6 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
-import { LanguageEngine } from "@/components/LanguageEngine";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://dccidadu.org.pk"),
@@ -20,7 +19,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en">
       <body className="min-h-screen antialiased">
-        <LanguageEngine />
         <Header />
         <main>{children}</main>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
