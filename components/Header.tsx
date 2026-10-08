@@ -29,6 +29,7 @@ export function Header() {
     document.documentElement.dir = code === "en" ? "ltr" : "rtl";
     document.documentElement.lang = code;
     localStorage.setItem("dcci-language", code);
+    window.dispatchEvent(new CustomEvent("dcci-language-change", { detail: code }));
   };
 
   useEffect(() => {
