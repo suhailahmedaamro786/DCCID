@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+export const metadata: Metadata = { title: "Executive Committee", description: "Executive committee, governance information and official records of Dadu Chamber of Commerce & Industry.", alternates: { canonical: "https://dccidadu.org.pk/committee" } };
 import { UsersRound, FileText, BriefcaseBusiness } from "lucide-react";
 import { PageHero } from "@/components/PageHero";
 import { Container } from "@/components/Container";
