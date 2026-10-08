@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+export const metadata: Metadata = { title: "Events", description: "Upcoming events, meetings, seminars and chamber activities in Dadu District.", alternates: { canonical: "https://dccidadu.org.pk/events" } };
 import { CalendarDays, MapPinned } from "lucide-react";
 import { PageHero } from "@/components/PageHero";
 import { Container } from "@/components/Container";
