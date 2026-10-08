@@ -1,0 +1,6 @@
+import { CalendarDays, MapPinned } from "lucide-react";
+import { PageHero } from "@/components/PageHero";
+import { Container } from "@/components/Container";
+import { Reveal } from "@/components/Reveal";
+
+export default function EventsPage(){const items=[["Chamber Events","Publish upcoming meetings, seminars, consultations and business community events here."],["Business Sessions","Highlight official sessions involving members, institutions and business stakeholders."],["Community Engagement","Document chamber activities and approved public engagements with dates and locations."]];return <><PageHero eyebrow="Events" title="Events & chamber activities" description="A dedicated space for upcoming events, past activities and official event information."/><Container className="py-20"><div className="grid gap-5 md:grid-cols-3">{items.map(([title,text],i)=><Reveal key={title} delay={i*.06}><div className="rounded-2xl border border-slate-200 bg-white p-7 shadow-soft"><CalendarDays className="text-gold-600"/><h3 className="mt-5 text-xl font-extrabold">{title}</h3><p className="mt-3 leading-7 text-slate-600">{text}</p><div className="mt-6 flex items-center gap-2 text-xs font-semibold text-slate-400"><MapPinned size={14}/> Dadu District, Sindh</div></div></Reveal>)}</div></Container></>}
