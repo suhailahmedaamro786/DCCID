@@ -195,6 +195,8 @@ const translations: Record<Exclude<Language, "en">, Record<string, string>> = {
     }
 };
 
+const originalText = new WeakMap<Text, string>();
+
 function normalize(value: string) {
   return value.replace(/\s+/g, " ").trim();
 }
@@ -208,8 +210,8 @@ function applyLanguage(language: Language) {
   for (const node of nodes) {
     const parent = node.parentElement;
     if (!parent || ["SCRIPT","STYLE","NOSCRIPT"].includes(parent.tagName)) continue;
-    const original = node.dataset.dcciOriginal ?? normalize(node.nodeValue ?? "");
-    if (!node.dataset.dcciOriginal) node.dataset.dcciOriginal = original;
+    const original = originalText.get(node) ?? normalize(node.nodeValue ?? "");
+    if (!originalText.has(node)) originalText.set(node, original);
     const translated = dict?.[original] ?? original;
     if (normalize(node.nodeValue ?? "") !== translated) node.nodeValue = translated;
   }
