@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+export const metadata: Metadata = { title: "News & Updates", description: "Verified chamber news, announcements and business community updates from Dadu Chamber of Commerce & Industry.", alternates: { canonical: "https://dccidadu.org.pk/news" } };
 import { PageHero } from "@/components/PageHero";
 import { Container } from "@/components/Container";
 import { Reveal } from "@/components/Reveal";
