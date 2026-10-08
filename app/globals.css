@@ -34,3 +34,18 @@ body { margin: 0; background: #f7f9fc; color: #0b1b31; }
 .dark .text-slate-600, .dark .text-slate-700 { color: #cbd5e1 !important; }
 .dark .border-slate-200, .dark .border-slate-200\/80 { border-color: rgba(71,85,105,.55) !important; }
 .dark main { background: #07111f; }
+
+
+/* Responsive + accessible polish */
+img, video { max-width: 100%; height: auto; }
+input, textarea, select, button { max-width: 100%; }
+:focus-visible { outline: 3px solid rgba(217,173,75,.65); outline-offset: 3px; }
+.dark .bg-slate-100 { background-color: #0d1728 !important; }
+.dark .text-slate-400, .dark .text-slate-500 { color: #94a3b8 !important; }
+.dark .text-slate-600 { color: #cbd5e1 !important; }
+.dark .border-slate-200 { border-color: rgba(71,85,105,.55) !important; }
+.dark input, .dark textarea, .dark select { background: #0b1628; color: #f8fafc; border-color: rgba(71,85,105,.7); }
+@media (max-width: 640px) {
+  .container-shell { width: min(100% - 24px, 1180px); }
+  h1 { letter-spacing: -.03em; }
+}
