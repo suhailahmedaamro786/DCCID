@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Menu, X, ArrowUpRight, Phone, Sun, Moon, Languages, Check } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { navItems } from "@/data/site";
 
 export function Header() {
@@ -31,12 +31,20 @@ export function Header() {
     localStorage.setItem("dcci-language", code);
   };
 
-  useState(() => {
+  useEffect(() => {
     const savedTheme = localStorage.getItem("dcci-theme") as "light" | "dark" | null;
     const savedLanguage = localStorage.getItem("dcci-language") as "en" | "sd" | "ur" | null;
-    if (savedTheme) setTheme(savedTheme);
-    if (savedLanguage) setLanguage(savedLanguage);
-  });
+    if (savedTheme) {
+      setTheme(savedTheme);
+      document.documentElement.classList.toggle("dark", savedTheme === "dark");
+      document.documentElement.style.colorScheme = savedTheme;
+    }
+    if (savedLanguage) {
+      setLanguage(savedLanguage);
+      document.documentElement.dir = savedLanguage === "en" ? "ltr" : "rtl";
+      document.documentElement.lang = savedLanguage;
+    }
+  }, []);
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur-xl shadow-[0_4px_24px_rgba(7,17,31,.04)]">
       <div className="bg-navy-950 text-white">
@@ -91,6 +99,16 @@ export function Header() {
       {open && (
         <div className="animate-in border-t border-slate-200 bg-white/98 shadow-xl xl:hidden">
           <nav className="container-shell grid gap-1 py-4">
+            <div className="flex items-center gap-2 border-b border-slate-200 pb-3 dark:border-slate-700">
+              <button type="button" onClick={toggleTheme} className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl border border-slate-200 px-3 py-2 text-sm font-bold dark:border-slate-700 dark:text-white">
+                {theme === "light" ? <Moon size={16} /> : <Sun size={16} />} {theme === "light" ? "Dark" : "Light"}
+              </button>
+              {languages.map((item) => (
+                <button key={item.code} type="button" onClick={() => selectLanguage(item.code)} className="rounded-xl border border-slate-200 px-3 py-2 text-xs font-bold dark:border-slate-700 dark:text-white">
+                  {item.short}{language === item.code && <Check size={12} className="ml-1 inline text-gold-500" />}
+                </button>
+              ))}
+            </div>
             {navItems.map((item) => (
               <Link key={item.href} href={item.href} onClick={() => setOpen(false)} className="rounded-xl border border-transparent px-3 py-3 font-semibold text-slate-700 transition hover:border-gold-200 hover:bg-gold-50 hover:text-navy-950">
                 {item.label}
