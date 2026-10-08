@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+export const metadata: Metadata = { title: "Resources & Downloads", description: "Official DCCI forms, notices, reports, circulars and business resources.", alternates: { canonical: "https://dccidadu.org.pk/resources" } };
 import { Download, FileText, FolderOpen } from "lucide-react";
 import { PageHero } from "@/components/PageHero";
 import { Container } from "@/components/Container";
