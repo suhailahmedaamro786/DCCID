@@ -1,12 +1,42 @@
 "use client";
 
 import Link from "next/link";
-import { Menu, X, ArrowUpRight, Phone } from "lucide-react";
+import { Menu, X, ArrowUpRight, Phone, Sun, Moon, Languages, Check } from "lucide-react";
 import { useState } from "react";
 import { navItems } from "@/data/site";
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [language, setLanguage] = useState<"en" | "sd" | "ur">("en");
+
+  const languages = [
+    { code: "en" as const, label: "English", short: "EN" },
+    { code: "sd" as const, label: "سنڌي", short: "SD" },
+    { code: "ur" as const, label: "اردو", short: "UR" },
+  ];
+
+  const toggleTheme = () => {
+    const next = theme === "light" ? "dark" : "light";
+    setTheme(next);
+    document.documentElement.classList.toggle("dark", next === "dark");
+    document.documentElement.style.colorScheme = next;
+    localStorage.setItem("dcci-theme", next);
+  };
+
+  const selectLanguage = (code: "en" | "sd" | "ur") => {
+    setLanguage(code);
+    document.documentElement.dir = code === "en" ? "ltr" : "rtl";
+    document.documentElement.lang = code;
+    localStorage.setItem("dcci-language", code);
+  };
+
+  useState(() => {
+    const savedTheme = localStorage.getItem("dcci-theme") as "light" | "dark" | null;
+    const savedLanguage = localStorage.getItem("dcci-language") as "en" | "sd" | "ur" | null;
+    if (savedTheme) setTheme(savedTheme);
+    if (savedLanguage) setLanguage(savedLanguage);
+  });
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur-xl shadow-[0_4px_24px_rgba(7,17,31,.04)]">
       <div className="bg-navy-950 text-white">
@@ -32,7 +62,22 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="hidden xl:block">
+        <div className="hidden xl:flex items-center gap-2">
+          <button type="button" onClick={toggleTheme} aria-label="Toggle theme" className="grid h-10 w-10 place-items-center rounded-xl border border-slate-200 bg-slate-50 text-navy-950 transition hover:border-gold-400 hover:bg-white dark:border-slate-700 dark:bg-slate-900 dark:text-white dark:hover:border-gold-400">
+            {theme === "light" ? <Moon size={17} /> : <Sun size={17} />}
+          </button>
+          <div className="group relative">
+            <button type="button" aria-label="Select language" className="inline-flex h-10 items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 text-sm font-bold text-navy-950 transition hover:border-gold-400 dark:border-slate-700 dark:bg-slate-900 dark:text-white">
+              <Languages size={16} /> {languages.find((item) => item.code === language)?.short}
+            </button>
+            <div className="invisible absolute right-0 top-11 w-36 translate-y-1 rounded-xl border border-slate-200 bg-white p-1.5 opacity-0 shadow-xl transition-all group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 dark:border-slate-700 dark:bg-slate-900">
+              {languages.map((item) => (
+                <button key={item.code} type="button" onClick={() => selectLanguage(item.code)} className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-gold-50 dark:text-slate-200 dark:hover:bg-slate-800">
+                  <span>{item.label}</span>{language === item.code && <Check size={14} className="text-gold-600" />}
+                </button>
+              ))}
+            </div>
+          </div>
           <Link href="/contact" className="btn-lift inline-flex items-center gap-2 rounded-xl bg-navy-950 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-navy-800">
             Contact Chamber <ArrowUpRight size={16} />
           </Link>
