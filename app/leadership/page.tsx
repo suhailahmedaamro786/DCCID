@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+export const metadata: Metadata = { title: "DCCI Leadership", description: "Meet the office bearers and leadership information of Dadu Chamber of Commerce & Industry.", alternates: { canonical: "https://dccidadu.org.pk/leadership" } };
 import { PageHero } from "@/components/PageHero";
 import { Container } from "@/components/Container";
 import { LeadershipCard } from "@/components/LeadershipCard";
