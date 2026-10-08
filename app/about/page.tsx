@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+export const metadata: Metadata = { title: "About DCCI", description: "Learn about Dadu Chamber of Commerce & Industry, its role, mission and services for Dadu's business community.", alternates: { canonical: "https://dccidadu.org.pk/about" } };
 import { Target, Eye, Flag, Building2 } from "lucide-react";
 import { PageHero } from "@/components/PageHero";
 import { Container } from "@/components/Container";
