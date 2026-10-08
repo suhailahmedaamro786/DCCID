@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+export const metadata: Metadata = { title: "Membership", description: "Membership information, requirements and application guidance for Dadu Chamber of Commerce & Industry.", alternates: { canonical: "https://dccidadu.org.pk/membership" } };
 import { CheckCircle2, UserPlus } from "lucide-react";
 import { PageHero } from "@/components/PageHero";
 import { Container } from "@/components/Container";
