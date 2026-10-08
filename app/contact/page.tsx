@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+export const metadata: Metadata = { title: "Contact DCCI", description: "Contact Dadu Chamber of Commerce & Industry for official chamber information, membership guidance and business community communication.", alternates: { canonical: "https://dccidadu.org.pk/contact" } };
 import { Mail, MapPin, Phone, Clock3 } from "lucide-react";
 import { PageHero } from "@/components/PageHero";
 import { Container } from "@/components/Container";
